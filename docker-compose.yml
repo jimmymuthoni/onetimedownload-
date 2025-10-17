@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    container_name: onetimedownload-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis:6379
+      - REDIS_PASSWORD=
+      - PORT=8080
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: onetimedownload-redis
+    restart: unless-stopped
